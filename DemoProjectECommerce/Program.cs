@@ -29,4 +29,6 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+ECommerceDbInitializer.Seed(app);
+
 app.Run();
