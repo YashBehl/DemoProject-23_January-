@@ -1,4 +1,5 @@
 using DemoProjectECommerce.Data;
+using DemoProjectECommerce.Data.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ECommerceDbContext>(options => 
     options.UseSqlServer(builder.Configuration.GetConnectionString("ECommerceConnectionString")));
+
+builder.Services.AddScoped<IProductsService, ProductsService>();
 
 var app = builder.Build();
 

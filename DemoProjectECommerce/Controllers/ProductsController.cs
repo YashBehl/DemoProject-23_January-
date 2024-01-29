@@ -1,4 +1,5 @@
 ﻿using DemoProjectECommerce.Data;
+using DemoProjectECommerce.Data.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,17 +7,17 @@ namespace DemoProjectECommerce.Controllers
 {
     public class ProductsController : Controller
     {
-        private readonly ECommerceDbContext _context;
+        private readonly IProductsService _service;
 
-        public ProductsController(ECommerceDbContext context)
+        public ProductsController(IProductsService service)
         {
-            _context = context;
+            _service = service;
         }
 
         public async Task<IActionResult> Index()
         {
-            var allProducts = await _context.tbl_Products.ToListAsync();
-            return View();
+            var allProducts = await _service.getAllAsync();
+            return View(allProducts);
         }
     }
 }

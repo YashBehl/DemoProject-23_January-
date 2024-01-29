@@ -1,9 +1,10 @@
-﻿using DemoProjectECommerce.Data.Enums;
+﻿using DemoProjectECommerce.Data.Base;
+using DemoProjectECommerce.Data.Enums;
 using System.ComponentModel.DataAnnotations;
 
 namespace DemoProjectECommerce.Models.Domain
 {
-    public class Product
+    public class Product:IEntityBase
     {
         [Key]
         public Guid productId { get; set; }

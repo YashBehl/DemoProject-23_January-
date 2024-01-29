@@ -1,0 +1,50 @@
+﻿@model IEnumerable<DemoProjectECommerce.Models.Domain.Product>
+
+@{
+    ViewData["Title"] = "List of Products";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+
+        <table class="table">
+            <thead>
+                <tr class="text-center">
+                    <th>@Html.DisplayNameFor(model => model.productName)</th>
+                    <th>@Html.DisplayNameFor(model => model.productDescription)</th>
+                    <th>@Html.DisplayNameFor(model => model.productPrice)</th>
+                    <th>@Html.DisplayNameFor(model => model.productImageUrl)</th>
+                    <th>@Html.DisplayNameFor(model => model.productQuantity)</th>
+                    <th>@Html.DisplayNameFor(model => model.productCategory)</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="align-middle">
+                        @Html.DisplayFor(modelItem => item.productName)
+                    </td>
+                    <td class="align-middle">
+                        @Html.DisplayFor(modelItem => item.productDescription)
+                    </td>
+                    <td class="align-middle">
+                        @Html.DisplayFor(modelItem => item.productPrice)
+                    </td>
+                    <td class="align-middle">
+                        @Html.DisplayFor(modelItem => item.productImageUrl)
+                    </td>
+                    <td class="align-middle">
+                        @Html.DisplayFor(modelItem => item.productQuantity)
+                    </td>
+                    <td class="align-middle">
+                        @Html.DisplayFor(modelItem => item.productCategory)
+                    </td>
+                </tr>
+            }
+            </tbody>
+            
+        </table>
+    </div>
+</div>
