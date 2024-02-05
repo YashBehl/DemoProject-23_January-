@@ -1,11 +1,14 @@
 ﻿using DemoProjectECommerce.Data;
 using DemoProjectECommerce.Data.Services;
+using DemoProjectECommerce.Data.Static;
 using DemoProjectECommerce.Models.Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace DemoProjectECommerce.Controllers
 {
+    [Authorize(Roles = UserRoles.admin)]
     public class ProductsController : Controller
     {
         private readonly IProductsService _service;
@@ -15,12 +18,28 @@ namespace DemoProjectECommerce.Controllers
             _service = service;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var allProducts = await _service.getAllAsync();
             return View(allProducts);
         }
 
+        [AllowAnonymous]
+        public async Task<IActionResult> Search(string searchString)
+        {
+            var allProducts = await _service.getAllAsync();
+
+            if(!string.IsNullOrEmpty(searchString))
+            {
+                var filteredResult = allProducts.Where(n => n.productName.Contains(searchString) || n.productDescription.Contains(searchString));
+                return View("Index", filteredResult);
+            }
+
+            return View("Index", allProducts);
+        }
+
+        [AllowAnonymous]
         public async Task<IActionResult> Details(Guid id)
         {
             var productDetail = await _service.getProductByIdAsync(id);
@@ -62,7 +81,7 @@ namespace DemoProjectECommerce.Controllers
                 productCategory = productDetails.productCategory
             };
 
-            return View();
+            return View(response);
         }
 
 

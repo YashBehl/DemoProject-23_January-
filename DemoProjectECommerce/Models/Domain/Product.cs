@@ -16,5 +16,7 @@ namespace DemoProjectECommerce.Models.Domain
         public int productQuantity { get; set; }    
 
         public ProductCategory productCategory { get; set; }
+
+        public DateTime createdAt { get; set; }
     }
 }

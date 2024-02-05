@@ -1,15 +1,34 @@
 using DemoProjectECommerce.Data;
+using DemoProjectECommerce.Data.Cart;
 using DemoProjectECommerce.Data.Services;
+using DemoProjectECommerce.Models.Domain;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+
 builder.Services.AddDbContext<ECommerceDbContext>(options => 
     options.UseSqlServer(builder.Configuration.GetConnectionString("ECommerceConnectionString")));
 
 builder.Services.AddScoped<IProductsService, ProductsService>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddScoped(sc => ShoppingCart.getShoppingCart(sc));
+
+
+//Authentication and authorisation
+builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<ECommerceDbContext>();
+builder.Services.AddMemoryCache();
+builder.Services.AddSession();
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+});
+
+
+builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
@@ -25,6 +44,12 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseSession();
+
+//authentication and authorisation
+app.UseAuthentication();
+app.UseAuthorization();
+
 
 app.UseAuthorization();
 
@@ -33,5 +58,6 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 ECommerceDbInitializer.Seed(app);
+ECommerceDbInitializer.SeedUserAndRolesAsync(app).Wait();
 
 app.Run();
