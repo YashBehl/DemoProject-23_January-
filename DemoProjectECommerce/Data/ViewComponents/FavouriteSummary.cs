@@ -3,17 +3,17 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DemoProjectECommerce.productCategory.ViewComponents
 {
-    public class ShoppingCartSummary:ViewComponent
+    public class FavouriteSummary:ViewComponent
     {
-        private readonly ShoppingCart _shoppingCart;
-        public ShoppingCartSummary(ShoppingCart shoppingCart)
+        private readonly Favourite _favourite;
+        public FavouriteSummary(Favourite favourite)
         {
-            _shoppingCart = shoppingCart;
+            _favourite = favourite;
         }
 
         public IViewComponentResult Invoke()
         {
-            var items = _shoppingCart.getShoppingCartItems();
+            var items = _favourite.getFavouriteItems();
             return View(items.Count);
         }
     }

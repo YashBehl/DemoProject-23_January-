@@ -1,0 +1,18 @@
+﻿@model DemoProjectECommerce.Models.Domain.Product
+@using DemoProjectECommerce.productCategory.Enums;
+
+@{
+    ViewData["Title"] = "Add a new product";
+}
+
+<form asp-action="Filter">
+    <div class="form-group">
+        <label asp-for="productCategory" class="control-label"></label>
+        <select asp-for="productCategory" class="form-control" asp-items="Html.GetEnumSelectList<ProductCategory>()"></select>
+        <span asp-validation-for="productCategory" class="text-danger"></span>
+    </div>
+    @if(User.Identity.IsAuthenticated && User.IsInRole("User"))
+    {
+        
+    }
+</form>

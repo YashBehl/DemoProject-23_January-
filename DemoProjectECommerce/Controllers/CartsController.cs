@@ -1,7 +1,7 @@
-﻿using DemoProjectECommerce.Data.Cart;
-using DemoProjectECommerce.Data.Services;
-using DemoProjectECommerce.Data.Static;
-using DemoProjectECommerce.Data.ViewModels;
+﻿using DemoProjectECommerce.productCategory.Cart;
+using DemoProjectECommerce.productCategory.Services;
+using DemoProjectECommerce.productCategory.Static;
+using DemoProjectECommerce.productCategory.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,11 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System.Linq;
+using System.Linq.Expressions;
 
-namespace DemoProjectECommerce.Data.Base
+namespace DemoProjectECommerce.productCategory.Base
 {
     public class EntityBaseRepository<T> : IEntityBaseRepository<T> where T : class, IEntityBase, new()
     {
         private readonly ECommerceDbContext _context;
+        private object current;
+        private object includeProperty;
+
         public EntityBaseRepository(ECommerceDbContext context)
         {
             _context = context;

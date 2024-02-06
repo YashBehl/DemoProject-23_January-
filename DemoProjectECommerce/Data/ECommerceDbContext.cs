@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace DemoProjectECommerce.Data
+namespace DemoProjectECommerce.productCategory
 {
     public class ECommerceDbContext : IdentityDbContext<AppUser>
     {
@@ -12,5 +12,6 @@ namespace DemoProjectECommerce.Data
 
         public DbSet<Product> tbl_Products { get; set; }
         public DbSet<ShoppingCartItem> tbl_ShoppingCartItems { get; set; }
+        public DbSet<FavouriteItem> tbl_FavouriteItems { get; set; }
     }
 }

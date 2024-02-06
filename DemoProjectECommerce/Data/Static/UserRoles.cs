@@ -1,4 +1,4 @@
-﻿namespace DemoProjectECommerce.Data.Static
+﻿namespace DemoProjectECommerce.productCategory.Static
 {
     public static class UserRoles
     {

@@ -1,7 +1,7 @@
 ﻿using DemoProjectECommerce.Models.Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace DemoProjectECommerce.Data.Cart
+namespace DemoProjectECommerce.productCategory.Cart
 {
     public class ShoppingCart
     {

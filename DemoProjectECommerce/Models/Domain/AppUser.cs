@@ -7,5 +7,6 @@ namespace DemoProjectECommerce.Models.Domain
     {
         [Display(Name = "Full Name")]
         public string fullName { get; set; }
+        //public string password { get; set; }
     }
 }

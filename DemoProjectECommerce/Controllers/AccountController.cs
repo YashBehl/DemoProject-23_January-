@@ -1,6 +1,6 @@
-﻿using DemoProjectECommerce.Data;
-using DemoProjectECommerce.Data.Static;
-using DemoProjectECommerce.Data.ViewModels;
+﻿using DemoProjectECommerce.productCategory;
+using DemoProjectECommerce.productCategory.Static;
+using DemoProjectECommerce.productCategory.ViewModels;
 using DemoProjectECommerce.Models.Domain;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -86,7 +86,8 @@ namespace DemoProjectECommerce.Controllers
             {
                 fullName = registerViewModel.fullName,
                 Email = registerViewModel.emailAddress,
-                UserName = registerViewModel.emailAddress
+                UserName = registerViewModel.emailAddress,
+                
             };
 
             var newUserResponse = await _userManager.CreateAsync(newUser, registerViewModel.password);

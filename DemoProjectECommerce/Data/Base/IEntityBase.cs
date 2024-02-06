@@ -1,4 +1,4 @@
-﻿namespace DemoProjectECommerce.Data.Base
+﻿namespace DemoProjectECommerce.productCategory.Base
 {
     public interface IEntityBase
     {

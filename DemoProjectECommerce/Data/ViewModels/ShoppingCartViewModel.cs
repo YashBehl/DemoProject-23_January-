@@ -1,6 +1,6 @@
-﻿using DemoProjectECommerce.Data.Cart;
+﻿using DemoProjectECommerce.productCategory.Cart;
 
-namespace DemoProjectECommerce.Data.ViewModels
+namespace DemoProjectECommerce.productCategory.ViewModels
 {
     public class ShoppingCartViewModel
     {

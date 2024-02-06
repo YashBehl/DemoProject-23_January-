@@ -1,8 +1,8 @@
-﻿using DemoProjectECommerce.Data.Static;
+﻿using DemoProjectECommerce.productCategory.Static;
 using DemoProjectECommerce.Models.Domain;
 using Microsoft.AspNetCore.Identity;
 
-namespace DemoProjectECommerce.Data
+namespace DemoProjectECommerce.productCategory
 {
     public class ECommerceDbInitializer
     {

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DemoProjectECommerce.Migrations
 {
     /// <inheritdoc />
-    public partial class Identity_Added : Migration
+    public partial class Migration_One : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -61,7 +61,11 @@ namespace DemoProjectECommerce.Migrations
                     productPrice = table.Column<int>(type: "int", nullable: false),
                     productImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     productQuantity = table.Column<int>(type: "int", nullable: false),
-                    productCategory = table.Column<int>(type: "int", nullable: false)
+                    productCategory = table.Column<int>(type: "int", nullable: false),
+                    createdAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    isHot = table.Column<bool>(type: "bit", nullable: true),
+                    isTrending = table.Column<bool>(type: "bit", nullable: true),
+                    isUnavailable = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -175,6 +179,25 @@ namespace DemoProjectECommerce.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "tbl_FavouriteItems",
+                columns: table => new
+                {
+                    favouriteItemId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    productId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    favouriteId = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tbl_FavouriteItems", x => x.favouriteItemId);
+                    table.ForeignKey(
+                        name: "FK_tbl_FavouriteItems_tbl_Products_productId",
+                        column: x => x.productId,
+                        principalTable: "tbl_Products",
+                        principalColumn: "productId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "tbl_ShoppingCartItems",
                 columns: table => new
                 {
@@ -234,6 +257,11 @@ namespace DemoProjectECommerce.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_tbl_FavouriteItems_productId",
+                table: "tbl_FavouriteItems",
+                column: "productId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_tbl_ShoppingCartItems_productId",
                 table: "tbl_ShoppingCartItems",
                 column: "productId");
@@ -256,6 +284,9 @@ namespace DemoProjectECommerce.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "tbl_FavouriteItems");
 
             migrationBuilder.DropTable(
                 name: "tbl_ShoppingCartItems");

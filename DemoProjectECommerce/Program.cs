@@ -1,6 +1,6 @@
-using DemoProjectECommerce.Data;
-using DemoProjectECommerce.Data.Cart;
-using DemoProjectECommerce.Data.Services;
+using DemoProjectECommerce.productCategory;
+using DemoProjectECommerce.productCategory.Cart;
+using DemoProjectECommerce.productCategory.Services;
 using DemoProjectECommerce.Models.Domain;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;

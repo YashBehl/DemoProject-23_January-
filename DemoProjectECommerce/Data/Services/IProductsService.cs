@@ -1,7 +1,7 @@
-﻿using DemoProjectECommerce.Data.Base;
+﻿using DemoProjectECommerce.productCategory.Base;
 using DemoProjectECommerce.Models.Domain;
 
-namespace DemoProjectECommerce.Data.Services
+namespace DemoProjectECommerce.productCategory.Services
 {
     public interface IProductsService:IEntityBaseRepository<Product>
     {

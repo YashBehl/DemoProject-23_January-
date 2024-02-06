@@ -1,9 +1,9 @@
-﻿using DemoProjectECommerce.Data.Base;
-using DemoProjectECommerce.Data.Enums;
+﻿using DemoProjectECommerce.productCategory.Base;
+using DemoProjectECommerce.productCategory.Enums;
 using DemoProjectECommerce.Models.Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace DemoProjectECommerce.Data.Services
+namespace DemoProjectECommerce.productCategory.Services
 {
     public class ProductsService : EntityBaseRepository<Product>, IProductsService
     {
@@ -22,7 +22,8 @@ namespace DemoProjectECommerce.Data.Services
                 productPrice = data.productPrice,
                 productImageUrl = data.productImageUrl,
                 productQuantity = data.productQuantity,
-                productCategory = data.productCategory
+                productCategory = data.productCategory,
+                createdAt = data.createdAt
             };
             await _context.tbl_Products.AddAsync(newProduct);
             await _context.SaveChangesAsync();
@@ -37,7 +38,7 @@ namespace DemoProjectECommerce.Data.Services
 
         public async Task updateProductAsync(NewProductViewModel data)
         {
-            var dbProduct = await _context.tbl_Products.FirstOrDefaultAsync(n => n.productId == n.productId);
+            var dbProduct = await _context.tbl_Products.FirstOrDefaultAsync(n => n.productId == data.productId);
 
             if (dbProduct != null)
             {
@@ -49,13 +50,8 @@ namespace DemoProjectECommerce.Data.Services
                 dbProduct.productCategory = data.productCategory;
                 await _context.SaveChangesAsync();
             }
-
-            var newProduct = new Product()
-            {
-                
-            };
-            await _context.tbl_Products.AddAsync(newProduct);
             
+            await _context.SaveChangesAsync();
         }
     }
 }

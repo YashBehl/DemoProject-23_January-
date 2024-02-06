@@ -1,4 +1,4 @@
-﻿namespace DemoProjectECommerce.Data.Enums
+﻿namespace DemoProjectECommerce.productCategory.Enums
 {
     public enum ProductCategory
     {
