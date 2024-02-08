@@ -4,6 +4,7 @@ using DemoProjectECommerce.productCategory;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DemoProjectECommerce.Migrations
 {
     [DbContext(typeof(ECommerceDbContext))]
-    partial class ECommerceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240207041133_Nullables_Removed")]
+    partial class Nullables_Removed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,13 +81,6 @@ namespace DemoProjectECommerce.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("isActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -127,13 +123,13 @@ namespace DemoProjectECommerce.Migrations
                     b.Property<DateTime>("createdAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("isHot")
+                    b.Property<bool>("isHot")
                         .HasColumnType("bit");
 
-                    b.Property<bool?>("isTrending")
+                    b.Property<bool>("isTrending")
                         .HasColumnType("bit");
 
-                    b.Property<bool?>("isUnavailable")
+                    b.Property<bool>("isUnavailable")
                         .HasColumnType("bit");
 
                     b.Property<int>("productCategory")

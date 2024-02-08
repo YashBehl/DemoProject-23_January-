@@ -1,5 +1,8 @@
 ﻿using DemoProjectECommerce.productCategory.Base;
+using DemoProjectECommerce.productCategory.ViewModels;
 using DemoProjectECommerce.Models.Domain;
+using System.Linq;
+
 
 namespace DemoProjectECommerce.productCategory.Services
 {
@@ -8,6 +11,6 @@ namespace DemoProjectECommerce.productCategory.Services
         Task<Product> getProductByIdAsync(Guid id);
         Task addNewProductAsync(NewProductViewModel data);
 
-        Task updateProductAsync(NewProductViewModel data);
+        Task UpdateProductAsync(NewProductViewModel data);
     }
 }

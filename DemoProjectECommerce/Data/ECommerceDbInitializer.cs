@@ -6,7 +6,7 @@ namespace DemoProjectECommerce.productCategory
 {
     public class ECommerceDbInitializer
     {
-        public static void Seed(IApplicationBuilder applicationBuilder)
+        /*public static void Seed(IApplicationBuilder applicationBuilder)
         {
             using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
             {
@@ -40,7 +40,7 @@ namespace DemoProjectECommerce.productCategory
                     });
                 }
             }
-        }
+        }*/
 
 
         public static async Task SeedUserAndRolesAsync(IApplicationBuilder applicationBuilder)
@@ -61,8 +61,10 @@ namespace DemoProjectECommerce.productCategory
 
                 var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
                 string adminUserEmail = "admin@ecommerce.com";
+                var adminUserPassword = "Admin@1234!@#$";
 
                 var adminUser = await userManager.FindByEmailAsync(adminUserEmail);
+                
                 if (adminUser == null)
                 {
                     var newAdminUser = new AppUser()
@@ -70,13 +72,16 @@ namespace DemoProjectECommerce.productCategory
                         fullName = "Admin User",
                         UserName = "admin-user",
                         Email = adminUserEmail,
-                        EmailConfirmed = true
+                        EmailConfirmed = true,
+                        password = adminUserPassword,
+                        isActive = true
                     };
-                    await userManager.CreateAsync(newAdminUser, "Admin@1234!@#$");
+                    await userManager.CreateAsync(newAdminUser, adminUserPassword);
                     await userManager.AddToRoleAsync(newAdminUser, UserRoles.admin);
                 }
 
                 string appUserEmail = "user@ecommerce.com";
+                var appUserPassword = "User@1234!@#$";
 
                 var appUser = await userManager.FindByEmailAsync(appUserEmail);
                 if (appUser == null)
@@ -87,8 +92,10 @@ namespace DemoProjectECommerce.productCategory
                         UserName = "app-user",
                         Email = appUserEmail,
                         EmailConfirmed = true,
+                        password = appUserPassword,
+                        isActive = true
                     };
-                    await userManager.CreateAsync(newAppUser, "User@1234!@#$");
+                    await userManager.CreateAsync(newAppUser, appUserPassword);
                     await userManager.AddToRoleAsync(newAppUser, UserRoles.user);
                 }
             }

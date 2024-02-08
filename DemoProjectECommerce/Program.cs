@@ -16,7 +16,7 @@ builder.Services.AddDbContext<ECommerceDbContext>(options =>
 builder.Services.AddScoped<IProductsService, ProductsService>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped(sc => ShoppingCart.getShoppingCart(sc));
-
+builder.Services.AddScoped(f => Favourite.getFavourite(f));
 
 //Authentication and authorisation
 builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<ECommerceDbContext>();
@@ -57,7 +57,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-ECommerceDbInitializer.Seed(app);
+//ECommerceDbInitializer.Seed(app);
 ECommerceDbInitializer.SeedUserAndRolesAsync(app).Wait();
 
 app.Run();

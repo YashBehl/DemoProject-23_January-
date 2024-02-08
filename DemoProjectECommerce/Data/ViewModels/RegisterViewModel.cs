@@ -8,10 +8,10 @@ namespace DemoProjectECommerce.productCategory.ViewModels
         [Required(ErrorMessage = "Full name is required")]
         public string fullName { get; set; }
 
-        [Display(Name = "Email Address")]
-        [Required(ErrorMessage = "Email address is required")]
+        
         public string emailAddress { get; set; }
 
+        [Display(Name = "Password")]
         [Required]
         [DataType(DataType.Password)]
         public string password { get; set; }
@@ -22,5 +22,10 @@ namespace DemoProjectECommerce.productCategory.ViewModels
         [DataType(DataType.Password)]
         [Compare("password", ErrorMessage = "Passwords do not match!")]
         public string confirmPassword { get; set; }
+
+
+        [Display(Name = "Phone Number")]
+        [DataType(DataType.PhoneNumber)]
+        public string? phoneNumber { get; set; }
     }
 }

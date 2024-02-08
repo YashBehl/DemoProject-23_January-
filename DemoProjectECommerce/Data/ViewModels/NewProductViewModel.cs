@@ -1,7 +1,10 @@
-﻿using DemoProjectECommerce.productCategory.Base;
+﻿using DemoProjectECommerce.productCategory;
+using DemoProjectECommerce.productCategory.Base;
 using DemoProjectECommerce.productCategory.Enums;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace DemoProjectECommerce.Models.Domain
 {
@@ -33,7 +36,11 @@ namespace DemoProjectECommerce.Models.Domain
         public ProductCategory productCategory { get; set; }
 
         
-        public DateTime createdAt {  get; set; }
+        public DateTime createdAt { get; set; }
+
+        public bool? isHot { get; set; }
+        public bool? isTrending { get; set; }
+        public bool? isUnavailable { get; set; }
 
     }
 }

@@ -8,6 +8,8 @@ namespace DemoProjectECommerce.productCategory.ViewModels
         [Required(ErrorMessage = "Email address is required")]
         public string emailAddress { get; set; }
 
+
+        [Display(Name = "Password")]
         [Required]
         [DataType(DataType.Password)]
         public string password { get; set; }

@@ -8,8 +8,7 @@ namespace DemoProjectECommerce.productCategory.Base
     public class EntityBaseRepository<T> : IEntityBaseRepository<T> where T : class, IEntityBase, new()
     {
         private readonly ECommerceDbContext _context;
-        private object current;
-        private object includeProperty;
+        
 
         public EntityBaseRepository(ECommerceDbContext context)
         {
@@ -19,6 +18,7 @@ namespace DemoProjectECommerce.productCategory.Base
         public async Task addAsync(T entity)
         {
             await _context.Set<T>().AddAsync(entity);
+            await _context.SaveChangesAsync();
         }
 
         public async Task deleteAsync(Guid id)
@@ -26,6 +26,7 @@ namespace DemoProjectECommerce.productCategory.Base
             var entity = await _context.Set<T>().FirstOrDefaultAsync(n => n.productId == id);
             EntityEntry entityEntry = _context.Entry<T>(entity);
             entityEntry.State = EntityState.Deleted;
+            await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<T>> getAllAsync()
@@ -44,6 +45,8 @@ namespace DemoProjectECommerce.productCategory.Base
         {
             EntityEntry entityEntry = _context.Entry<T>(entity);
             entityEntry.State = EntityState.Modified;
+
+            await _context.SaveChangesAsync();
         }
     }
 }

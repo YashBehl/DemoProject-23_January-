@@ -31,28 +31,28 @@
                         {
                             @if(Model.isHot != true)
                             {
-                                <button class="btn btn-danger" asp-action="markAsHot">Mark as Hot</button>
+                                <a class="btn btn-danger" asp-action="markAsHot" asp-route-id="@Model.productId">Mark as Hot</a>
                             }
                             @if(Model.isTrending != true)
                             {
-                                <button class="btn btn-primary" asp-action="markAsTrending">Mark as Trending</button>
+                                <a class="btn btn-primary" asp-action="markAsTrending" asp-route-id="@Model.productId">Mark as Trending</a>
                             }
                             @if(Model.isUnavailable != true)
                             {
-                                <button class="btn btn-dark" asp-action="Delete">Make Unavailable</button>
+                                <a class="btn btn-dark" asp-action="Delete" asp-route-id="@Model.productId">Make Unavailable</a>
                             }
                             <br />
                             @if (Model.isHot == true)
                             {
-                                <button class="btn btn-danger" asp-action="disableHot">Disable Hot</button>
+                                <a class="btn btn-danger" asp-action="disableHot" asp-route-id="@Model.productId">Disable Hot</a>
                             }
                             @if (Model.isTrending == true)
                             {
-                                <button class="btn btn-primary" asp-action="disableTrending">Disable Trending</button>
+                                <a class="btn btn-primary" asp-action="disableTrending" asp-route-id="@Model.productId">Disable Trending</a>
                             }
                             @if (Model.isUnavailable == true)
                             {
-                                <button class="btn btn-dark" asp-action="makeAvailable">Make Available</button>
+                                <a class="btn btn-dark" asp-action="makeAvailable" asp-route-id="@Model.productId">Make Available</a>
                             }
                         }
                     </div>

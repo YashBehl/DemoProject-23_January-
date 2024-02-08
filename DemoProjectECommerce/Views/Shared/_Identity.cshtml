@@ -23,7 +23,10 @@ else
 
             @if(User.Identity.IsAuthenticated && User.IsInRole("Admin"))
             {
-                    <a class="btn btn-secondary mx-lg-2" asp-controller="Account" asp-action="Users">
+                    <a class="btn btn-info" asp-controller="Products" asp-action="AllProducts">
+                        Products List
+                     </a>
+                    <a class="btn btn-secondary" asp-controller="Account" asp-action="Users">
                         <i class="bi bi-people"></i> Users
                     </a>
             }

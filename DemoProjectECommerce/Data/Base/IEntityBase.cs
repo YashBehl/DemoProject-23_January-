@@ -1,4 +1,6 @@
-﻿namespace DemoProjectECommerce.productCategory.Base
+﻿using System.Linq;
+
+namespace DemoProjectECommerce.productCategory.Base
 {
     public interface IEntityBase
     {

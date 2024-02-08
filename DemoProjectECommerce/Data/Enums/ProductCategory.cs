@@ -2,7 +2,8 @@
 {
     public enum ProductCategory
     {
-        Electronics = 1,
+        All = 1,
+        Electronics,
         Clothing,
         Grocery,
         Plastics,

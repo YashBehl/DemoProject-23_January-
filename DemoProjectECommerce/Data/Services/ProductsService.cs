@@ -1,7 +1,9 @@
 ﻿using DemoProjectECommerce.productCategory.Base;
-using DemoProjectECommerce.productCategory.Enums;
+using DemoProjectECommerce.productCategory.ViewModels;
 using DemoProjectECommerce.Models.Domain;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using DemoProjectECommerce.productCategory.Enums;
 
 namespace DemoProjectECommerce.productCategory.Services
 {
@@ -27,7 +29,6 @@ namespace DemoProjectECommerce.productCategory.Services
             };
             await _context.tbl_Products.AddAsync(newProduct);
             await _context.SaveChangesAsync();
-
         }
 
         public async Task<Product> getProductByIdAsync(Guid id)
@@ -36,7 +37,7 @@ namespace DemoProjectECommerce.productCategory.Services
             return productDetails;
         }
 
-        public async Task updateProductAsync(NewProductViewModel data)
+        public async Task UpdateProductAsync(NewProductViewModel data)
         {
             var dbProduct = await _context.tbl_Products.FirstOrDefaultAsync(n => n.productId == data.productId);
 
@@ -48,6 +49,10 @@ namespace DemoProjectECommerce.productCategory.Services
                 dbProduct.productImageUrl = data.productImageUrl;
                 dbProduct.productQuantity = data.productQuantity;
                 dbProduct.productCategory = data.productCategory;
+                dbProduct.createdAt = data.createdAt;
+                dbProduct.isHot = data.isHot;
+                dbProduct.isTrending = data.isTrending;
+                dbProduct.isUnavailable = data.isUnavailable;
                 await _context.SaveChangesAsync();
             }
             

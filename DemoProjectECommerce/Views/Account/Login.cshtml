@@ -1,4 +1,5 @@
 ﻿@using DemoProjectECommerce.productCategory.ViewModels;
+@using DemoProjectECommerce.Models.Domain;
 @model LoginViewModel
 
 @{
@@ -14,10 +15,16 @@
         @if(TempData["Error"] != null)
         {
             <div class="col-md-12 alert alert-danger">
-                <span><b>Sorry!</b> - @TempData["Error"] </span>
+                <span> @TempData["Error"] </span>
             </div>
         }
 
+        @if (TempData["Deactivation"] != null)
+        {
+            <div class="col-md-12 alert alert-danger">
+                <span> @TempData["Deactivation"] </span>
+            </div>
+        }
         <div class="row">
             <div class="col-md-8 offset-2">
                 <form asp-action="Login">
@@ -36,9 +43,11 @@
 
                     <div class="form-group">
                         <input class="btn btn-outline-success float-right" type="submit" value="Log In"/>
+                        
                         <a class="btn btn-outline-secondary" asp-controller="Products" asp-action="Index">Cancel</a>
                     </div>
                 </form>
+                
             </div>
         </div>
     </div>

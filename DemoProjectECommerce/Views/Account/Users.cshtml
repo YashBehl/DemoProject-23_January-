@@ -5,36 +5,66 @@
     ViewData["Title"] = "List of all users";
 }
 
-<div class="row">
-    <div class="col-md-6 offset-3">
-        <p>
-            <h4>List of all users</h4>
-        </p>
-        <table class="table">
-            <thead>
-                <tr class="text-center">
-                    <th>@Html.DisplayNameFor(model => model.fullName)</th>
-                    <th>@Html.DisplayNameFor(model => model.UserName)</th>
-                    <th>@Html.DisplayNameFor(model => model.Email)</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                @foreach(var item in Model)
-                {
-                    <tr>
-                        <td class="align-middle">
-                            @Html.DisplayFor(modelItem => item.fullName)
-                        </td>
-                        <td class="align-middle">
-                            @Html.DisplayFor(modelItem => item.UserName)
-                        </td>
-                        <td class="align-middle">
-                            @Html.DisplayFor(modelItem => item.Email)
-                        </td>
+@if(User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <div class="row">
+        <div class="col-md-6 offset-3">
+            <p>
+                <h4>List of all users</h4>
+            </p>
+            <table class="table">
+                <thead>
+                    <tr class="text-center">
+                        <th>@Html.DisplayNameFor(model => model.fullName)</th>
+                        <th>@Html.DisplayNameFor(model => model.UserName)</th>
+                        <th>@Html.DisplayNameFor(model => model.Email)</th>
+                        <th>@Html.DisplayNameFor(model => model.PhoneNumber)</th>
+                        <th></th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="align-middle">
+                                @Html.DisplayFor(modelItem => item.fullName)
+                            </td>
+                            <td class="align-middle">
+                                @Html.DisplayFor(modelItem => item.UserName)
+                            </td>
+                            <td class="align-middle">
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td class="align-middle">
+                                @Html.DisplayFor(modelItem => item.PhoneNumber)
+                            </td>
+                            <td class="align-middle">
+
+                                @if (item.isActive == true)
+                                {
+                                    @if ((item.Email != "admin@ecommerce.com") || (item.Email != "user@ecommerce"))
+                                    {
+                                        <a class="btn btn-outline-danger my-1" asp-action="Deactivate" asp-route-email="@item.Email">Deactivate</a>
+                                        <a class="btn btn-outline-primary my-1" asp-action="Edit" asp-route-email="@item.Email">Edit Details</a>
+                                    }
+
+                                }
+                                @if ((item.isActive != true))
+                                {
+                                    @if ((item.Email != "admin@ecommerce.com") || (item.Email != "user@ecommerce"))
+                                    {
+                                        <a class="btn btn-outline-success my-1" asp-action="Activate" asp-route-email="@item.Email">Activate</a>
+                                    }
+
+                                }
+
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
+}

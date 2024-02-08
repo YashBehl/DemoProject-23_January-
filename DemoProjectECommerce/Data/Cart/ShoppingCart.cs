@@ -1,5 +1,7 @@
 ﻿using DemoProjectECommerce.Models.Domain;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.ComponentModel.DataAnnotations;
 
 namespace DemoProjectECommerce.productCategory.Cart
 {
@@ -7,7 +9,10 @@ namespace DemoProjectECommerce.productCategory.Cart
     {
         private ECommerceDbContext _context { get; set; }
 
+        
         public string shoppingCartId { get; set; }
+
+
         public List<ShoppingCartItem> shoppingCartItems { get; set; }
         public ShoppingCart(ECommerceDbContext context)
         {

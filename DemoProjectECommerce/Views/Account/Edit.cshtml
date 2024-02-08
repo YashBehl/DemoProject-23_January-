@@ -2,16 +2,16 @@
 @model RegisterViewModel
 
 @{
-    ViewData["Title"] = "Sign up for a new account";
+    ViewData["Title"] = "Edit user details";
 }
 
 <div class="row">
     <div class="col-md-6 offset-3">
         <p>
-            <h4>Sign up for a new account</h4>
+            <h4>Edit user details</h4>
         </p>
 
-        @if(TempData["Error"] != null)
+        @if (TempData["Error"] != null)
         {
             <div class="col-md-12 alert alert-danger">
                 <span> @TempData["Error"] </span>
@@ -20,17 +20,12 @@
 
         <div class="row">
             <div class="col-md-8 offset-2">
-                <form asp-action="Register">
+                <form asp-action="Edit" asp-route-email="@Model.emailAddress">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
                         <label asp-for="fullName" class="control-label"></label>
                         <input asp-for="fullName" class="form-control" />
                         <span asp-validation-for="fullName" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="emailAddress" class="control-label"></label>
-                        <input asp-for="emailAddress" class="form-control"/>
-                        <span asp-validation-for="emailAddress" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="phoneNumber" class="control-label"></label>
@@ -42,15 +37,10 @@
                         <input asp-for="password" class="form-control" />
                         <span asp-validation-for="password" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="confirmPassword" class="control-label"></label>
-                        <input asp-for="confirmPassword" class="form-control" />
-                        <span asp-validation-for="confirmPassword" class="text-danger"></span>
-                    </div>
 
                     <div class="form-group">
-                        <input class="btn btn-outline-success float-right" type="submit" value="Sign Up"/>
-                        <a class="btn btn-outline-secondary" asp-controller="Products" asp-action="Index">Cancel</a>
+                        <input class="btn btn-outline-success float-right" type="submit" value="Update" />
+                        <a class="btn btn-outline-secondary" asp-controller="Account" asp-action="Users">Cancel</a>
                     </div>
                 </form>
             </div>
