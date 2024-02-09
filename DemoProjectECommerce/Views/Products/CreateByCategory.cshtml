@@ -3,7 +3,6 @@
 
 @{
     ViewData["Title"] = "Add a new product";
-    var categoryId = TempData["categoryId"];
 }
 
 <div class="row">
@@ -14,7 +13,7 @@
 
         <div class="row">
             <div class="col-md-8 offset-2">
-                <form asp-action="Create">
+                <form asp-action="CreateByCategory">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="row">
                         <div class="col-md-4">
@@ -44,7 +43,6 @@
                             <div class="form-group">
                                 <label asp-for="productCategory" class="control-label"></label>
                                 <select asp-for="productCategory" class="form-control" asp-items="Html.GetEnumSelectList<ProductCategory>().Skip(1)"></select> 
-                                
                                 <span asp-validation-for="productCategory" class="text-danger"></span>
                             </div>
                             <div class="form-group">

@@ -12,7 +12,6 @@ namespace DemoProjectECommerce.productCategory.Cart
         
         public string shoppingCartId { get; set; }
 
-
         public List<ShoppingCartItem> shoppingCartItems { get; set; }
         public ShoppingCart(ECommerceDbContext context)
         {

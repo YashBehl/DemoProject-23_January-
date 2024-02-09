@@ -5,6 +5,7 @@ using DemoProjectECommerce.Models.Domain;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using DemoProjectECommerce.Email;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,7 +27,7 @@ builder.Services.AddAuthentication(options =>
 {
     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 });
-
+builder.Services.AddTransient<EmailSender>();
 
 builder.Services.AddControllersWithViews();
 

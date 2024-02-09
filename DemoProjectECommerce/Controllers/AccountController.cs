@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using DemoProjectECommerce.productCategory.Cart;
+using DemoProjectECommerce.Email;
+
 
 namespace DemoProjectECommerce.Controllers
 {
@@ -15,14 +18,19 @@ namespace DemoProjectECommerce.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ECommerceDbContext _context;
+        private readonly ShoppingCart _shoppingCart;
+        private readonly EmailSender _emailSender;
 
         public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager,
-            ECommerceDbContext context)
+            ECommerceDbContext context, ShoppingCart shoppingCart, EmailSender emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _context = context;
+            _shoppingCart = shoppingCart;
+            _emailSender = emailSender;
         }
+
 
         public IActionResult Users()
         { 
@@ -48,7 +56,7 @@ namespace DemoProjectECommerce.Controllers
             }
            
             var user = await _userManager.FindByEmailAsync(loginViewModel.emailAddress);
-
+            
             if (user != null)
             {
                 bool? checkActivation = _userManager.Users.First(n => n.Email == loginViewModel.emailAddress).isActive;
@@ -107,6 +115,7 @@ namespace DemoProjectECommerce.Controllers
                 UserName = registerViewModel.emailAddress,
                 PhoneNumber = registerViewModel.phoneNumber,
                 password = registerViewModel.password,
+                userCartId = _shoppingCart.shoppingCartId,
                 isActive = true
             };
 
@@ -186,7 +195,10 @@ namespace DemoProjectECommerce.Controllers
                 
                 await _userManager.UpdateAsync(user);
             }
-
+            if (oldPassword != user.password)
+            {
+                await _emailSender.SendMails(email, "The password of your Demo Ecommerce is changed Successfully by Admin", "New Password-" + user.password);
+            }
             return RedirectToAction(nameof(Users));
         }
 

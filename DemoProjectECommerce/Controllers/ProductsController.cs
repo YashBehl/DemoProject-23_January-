@@ -74,7 +74,7 @@ namespace DemoProjectECommerce.Controllers
 
 
 
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             return View();
         }
@@ -107,7 +107,43 @@ namespace DemoProjectECommerce.Controllers
 
 
 
-        
+
+        public IActionResult CreateByCategory(ProductCategory productCategory)
+        {
+            return View(productCategory);
+        }
+
+
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> CreateByCategory(NewProductViewModel product)
+        {
+            var newProduct = new NewProductViewModel()
+            {
+                productName = product.productName,
+                productDescription = product.productDescription,
+                productCategory = product.productCategory,
+                productPrice = product.productPrice,
+                productQuantity = product.productQuantity,
+                productImageUrl = product.productImageUrl,
+                createdAt = DateTime.Now,
+            };
+
+            if (!ModelState.IsValid)
+            {
+                return View(product);
+            }
+            await _service.addNewProductAsync(newProduct);
+            return RedirectToAction(nameof(Index));
+        }
+
+
+
+
+
+
         public async Task<IActionResult> Edit(Guid id)
         {
             var productDetails = await _service.getProductByIdAsync(id);
@@ -381,8 +417,7 @@ namespace DemoProjectECommerce.Controllers
                     }
                 }
             }
-
-            
+            var productCategory = newInputProducts.productCategory;
             return View("Index", filteredResult);
         }
     }

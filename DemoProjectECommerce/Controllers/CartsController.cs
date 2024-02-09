@@ -1,4 +1,5 @@
-﻿using DemoProjectECommerce.productCategory.Cart;
+﻿using DemoProjectECommerce.Models.Domain;
+using DemoProjectECommerce.productCategory.Cart;
 using DemoProjectECommerce.productCategory.Services;
 using DemoProjectECommerce.productCategory.Static;
 using DemoProjectECommerce.productCategory.ViewModels;
@@ -29,7 +30,7 @@ namespace DemoProjectECommerce.Controllers
                 shoppingCart = _shoppingCart,
                 shoppingCartTotal = _shoppingCart.getShoppingCartTotal()
             };
-
+            
 
             return View(response);
         }
@@ -40,6 +41,7 @@ namespace DemoProjectECommerce.Controllers
 
             if(item != null)
             {
+
                 _shoppingCart.addItemToCart(item);
             }
             return RedirectToAction(nameof(ShoppingCart));

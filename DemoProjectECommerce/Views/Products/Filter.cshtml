@@ -45,3 +45,38 @@
         </div>
     </div>
 </div>
+
+<!--if(User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <div style="position: fixed; right:25px; bottom:25px;" class="text-white">
+        <a asp-controller="Products" asp-action="CreateByCategory" asp-route-productCategory="Model.productCategory" class="btn btn-success">
+            <i class="bi bi-plus-circle"></i> Add New (By Category)
+        </a>
+    </div>
+}-->
+
+
+<!--
+section Scripts {
+        <script>
+            $(document).ready(function () {
+                $('#AddByCategory').on('change', function() {
+                    var selectedCategory = $(this).val();
+
+                    $.ajax({
+                        url: 'Url.Action("CreateByCategory", "Products")',
+                        type:'POST',
+                        data: { id: selectedCategory },
+                        success: function (data) {
+                            console.log(data.success)
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+
+                    })
+                })
+            });
+        </script>
+}
+-->
